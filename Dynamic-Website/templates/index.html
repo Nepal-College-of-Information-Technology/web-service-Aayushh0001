@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI + TinyDB</title>
+</head>
+<body>
+    <h2>Add Item</h2>
+    <form action="/add" method="post">
+        <input type="text" name="item" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>Items</h2>
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item.item }}
+
+            <!-- Edit form -->
+            <form action="/edit/{{ item.doc_id }}" method="post" style="display:inline;">
+                <input type="text" name="new_item" placeholder="Edit..." required>
+                <button type="submit">Edit</button>
+            </form>
+
+            <!-- Delete button -->
+            <form action="/delete/{{ item.doc_id }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
